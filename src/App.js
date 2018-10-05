@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import StationSelector from './StationSelector.js';
+import RouteDisplay from './RouteDisplay.js';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {lines: [], lineMap: {}, stations: null, station_count: 0, sourceStation: null, destStation: null, trips: []}
+    this.state = {lines: [], lineMap: {}, stations: [], stationMap: {}, sourceStation: null, destStation: null, trips: []}
   }
 
   componentDidMount() {
@@ -33,7 +34,15 @@ class App extends Component {
       .then((response) => {
           return response.json();
       }).then((json) => {
-        this.setState({stations: json.root.stations.station, station_count: json.root.stations.station.length});
+        this.setState({stations: json.root.stations.station});
+        // Add each station into the map
+        var stationMap = {};
+        for(var i=0; i<json.root.stations.station.length; i++) {
+          var currentStation = json.root.stations.station[i];
+          stationMap[currentStation.abbr] = currentStation;
+        }
+        this.setState({stationMap: stationMap});
+        console.log(JSON.stringify(stationMap))
       }).catch(e => {
         console.log(e)
       })
@@ -75,76 +84,10 @@ class App extends Component {
       <div className="App">
         <div className="container">
 
-        {/* Need to make this into a component and propogate the state up */}
-        <div className="row justify-content-md-center">
-           <div className="col-md-3 sad">
-           <h2>Depart From</h2>
-           <select className="form-control" onChange={this.onSelectChangeSource.bind(this)}>
-           {this.state.station_count > 0 && (
-               this.state.stations.map(function(currentStation,index){
-                  return <option value={currentStation.abbr} key={index}>{currentStation.name}</option>;
-               })
-           )}
-          </select>
-           </div>
-         </div>
+        <StationSelector onChangeHandler={this.onSelectChangeSource.bind(this)} stations={this.state.stations} label="Depart From"/>
+        <StationSelector onChangeHandler={this.onSelectChangeTarget.bind(this)} stations={this.state.stations} label="Arrive At"/>
 
-         {/* Need to make this into a component and propogate the state up */}
-         <div className="row justify-content-md-center">
-            <div className="col-md-3 sad">
-            <h2>Arrive At</h2>
-            <select className="form-control" onChange={this.onSelectChangeTarget.bind(this)}>
-            {this.state.station_count > 0 && (
-                this.state.stations.map(function(currentStation,index){
-                   return <option value={currentStation.abbr} key={index}>{currentStation.name}</option>;
-                })
-            )}
-           </select>
-            </div>
-          </div>
-
-
-          {/* Route Planner */}
-          <div className="row justify-content-md-center">
-             <div className="col-md-3 sad">
-             <h2>Route Options</h2>
-
-             <table className="table table-striped">
-             <tbody>
-
-            {/* Route List */}
-            {this.state.trips.length > 0 && (
-                this.state.trips.map((currentRoute,index) => {
-                  var rows = [];
-                  for(var i=0; i<currentRoute.leg.length; i++) {
-                    var currentLine = this.state.lineMap[currentRoute.leg[i]['@line']]
-                    console.log('color ' + currentLine.hexcolor)
-                    rows.push(
-                      <tr>
-                        <td style={{backgroundColor: currentLine.hexcolor}}>{currentRoute.leg[i]['@origin']} =></td>
-                        <td style={{backgroundColor: currentLine.hexcolor}}>{currentRoute.leg[i]['@destination']}</td>
-                      </tr>
-                    )
-                  }
-                  console.log('there are ')
-                   return (
-                     <Fragment key={currentRoute['@destTimeMin']}>
-                     <tr>
-                       <th>Arrive around {currentRoute['@destTimeMin']}</th>
-                       <th>Fare: ${currentRoute['@fare']}</th>
-                     </tr>
-                     {rows}
-                     </Fragment>
-                   );
-                })
-            )}
-
-
-             </tbody>
-             </table>
-
-             </div>
-           </div>
+        <RouteDisplay stations={this.state.stations} trips={this.state.trips} lineMap={this.state.lineMap} stationMap={this.state.stationMap}/>
         </div>
       </div>
     );
