@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import RouteCard from './RouteCard.js';
 
 class RouteDisplay extends Component {
   constructor(props) {
@@ -12,43 +13,13 @@ class RouteDisplay extends Component {
            <div className="col-md-3 sad">
            <h2>Route Options</h2>
 
-           <table className="table table-striped">
-           <tbody>
-
           {/* Route List */}
           {this.props.trips.length > 0 && (
               this.props.trips.map((currentRoute,index) => {
-                var rows = [];
-                for(var i=0; i<currentRoute.leg.length; i++) {
-                  var currentLine = this.props.lineMap[currentRoute.leg[i]['@line']]
-                  console.log('color ' + currentLine.hexcolor)
-                  rows.push(
-                    <tr>
-                      <td style={{backgroundColor: currentLine.hexcolor}}>
-                      {this.props.stationMap[currentRoute.leg[i]['@origin']].name} =>
-                      </td>
-                      <td style={{backgroundColor: currentLine.hexcolor}}>
-                      {this.props.stationMap[currentRoute.leg[i]['@destination']].name}
-                      </td>
-                    </tr>
-                  )
-                }
-                console.log('there are ')
-                 return (
-                   <Fragment key={currentRoute['@destTimeMin']}>
-                   <tr>
-                     <th>Arrive around {currentRoute['@destTimeMin']}</th>
-                     <th>Fare: ${currentRoute['@fare']}</th>
-                   </tr>
-                   {rows}
-                   </Fragment>
-                 );
+                return <RouteCard route={currentRoute} stationMap={this.props.stationMap} lineMap={this.props.lineMap}/>
               })
           )}
 
-
-           </tbody>
-           </table>
 
            </div>
          </div>
