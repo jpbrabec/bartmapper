@@ -14,12 +14,6 @@
   text-align: center;
   line-height: 25px;
   vertical-align: middle;
-  transition-duration: 0.1s;
-}
-
-.stopCircleIcon:hover {
-  width: 35px;
-  height: 35px;
 }
 
 .iconTop {
