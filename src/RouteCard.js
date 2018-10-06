@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import './RouteCard.css';
 
 class RouteCard extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class RouteCard extends Component {
         legs.push(
           <Fragment key={i}>
           <tr>
-          <td> {currentRoute.leg[i]['@origTimeMin']}</td>
+          <td><span className="glyphicon glyphicon-triangle-right" aria-hidden="true"></span> {currentRoute.leg[i]['@origTimeMin']}</td>
           <td style={{backgroundColor: currentLine.hexcolor, height: '100%'}}></td>
           <td>{this.props.stationMap[currentRoute.leg[i]['@origin']].name}</td>
           </tr>
@@ -23,7 +24,7 @@ class RouteCard extends Component {
             <td>{currentLine.name}</td>
           </tr>
           <tr>
-            <td>  {currentRoute.leg[i]['@destTimeMin']}</td>
+            <td><span className="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>{currentRoute.leg[i]['@destTimeMin']}</td>
             <td style={{backgroundColor: currentLine.hexcolor, height: '100%'}}></td>
             <td>{this.props.stationMap[currentRoute.leg[i]['@destination']].name}</td>
           </tr>
@@ -34,7 +35,7 @@ class RouteCard extends Component {
         if(i<currentRoute.leg.length-1) {
           legs.push(
             <tr>
-            <td></td>
+            <td><span className="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span></td>
             <td>Transfer Lines</td>
             <td></td>
             </tr>
@@ -49,6 +50,40 @@ class RouteCard extends Component {
         </div>
         <div class="panel-body">
         <div class="col-md-12">
+
+        <div className="stopCardWrapper">
+
+        <div className="stopContainer">
+        <div className="stopCircle">
+          <div className="stopCircleIcon iconTop">
+            <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          </div>
+        </div>
+          <div className="stopPadder">
+          </div>
+          <div className="stopCircle">
+          <div className="stopCircleIcon iconBot">
+            <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          </div>
+        </div>
+        </div>
+
+        <div className="stopInfoContainer">
+          <div className="stopCircleInfo infoTop">
+            <p><b>16th & Market</b></p>
+            <p>Board at 5:15 pm</p>
+          </div>
+          <div className="stopPadderInfo">
+            <p><b>Red Line</b></p>
+            <p>18 Stops</p>
+          </div>
+          <div className="stopCircleInfo infoBot">
+            <p><b>25th & Market</b></p>
+            <p>Exit at 5:55 pm</p>
+          </div>
+        </div>
+        </div>
+
         <table className="table">
         <tbody>
           {legs}

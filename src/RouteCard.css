@@ -1,0 +1,77 @@
+.stopCircle {
+  width: 30px;
+  height: 40px;
+  text-align: center;
+  line-height: 25px;
+  vertical-align: middle;
+}
+
+.stopCircleIcon {
+  background-color: red;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 25px;
+  vertical-align: middle;
+  transition-duration: 0.1s;
+}
+
+.stopCircleIcon:hover {
+  width: 35px;
+  height: 35px;
+}
+
+.iconTop {
+  margin: 10px 0 0 0;
+}
+
+.iconBot {
+  margin: 0 0 10px 0;
+}
+.stopPadder {
+  width: 5px;
+  height: 40px;
+  background-color: red;
+}
+
+.stopContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 35px;
+}
+
+.stopInfoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.stopCardWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.stopCircleInfo {
+  height: 40px;
+  text-align: left;
+  line-height: 1px;
+  padding: 0 0 0 10px;
+}
+
+.infoTop {
+  padding-top: 20px;
+}
+
+.infoBot {
+  padding-top: 10px;
+}
+.stopPadderInfo {
+  height: 40px;
+  text-align: left;
+  line-height: 5px;
+  padding: 12px 0 0 10px;
+}
