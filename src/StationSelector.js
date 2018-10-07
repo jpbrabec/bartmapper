@@ -15,8 +15,8 @@ class StationSelector extends Component {
         <form className="form-horizontal">
         <div className="form-group">
 
-          <label className="control-label col-sm-3" htmlFfor={"select-"+this.props.key}>{this.props.label}</label>
-          <select id={"select-"+this.props.key} className="form-control col-sm-9" style={{fontSize: '10pt', height: '40px'}} defaultValue="na" onChange={this.props.onChangeHandler}>
+          <label className="control-label col-sm-3" htmlFor={"select-"+this.props.keyName}>{this.props.label}</label>
+          <select id={"select-"+this.props.keyName} className="form-control col-sm-9" style={{fontSize: '10pt', height: '40px'}} defaultValue="na" onChange={this.props.onChangeHandler}>
           <option value="na" disabled>Select a station</option>
           {this.props.stations.length > 0 && (
               this.props.stations.map(function(currentStation,index){

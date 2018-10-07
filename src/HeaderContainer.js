@@ -10,18 +10,18 @@ class HeaderContainer extends Component {
   render() {
     return (
     <Fragment>
-    <div class="row justify-content-md-center">
-      <div class="col-md-4">
+    <div className="row justify-content-md-center">
+      <div className="col-md-4">
       <h2>BartMapper</h2>
       <hr/>
       </div>
     </div>
 
-    <StationSelector key="1" onChangeHandler={this.props.onChangeSourceHandler} stations={this.props.stations} label="Depart From"/>
-    <StationSelector key="2" onChangeHandler={this.props.onChangeDestHandler} stations={this.props.stations} label="Arrive At"/>
+    <StationSelector keyName="1" onChangeHandler={this.props.onChangeSourceHandler} stations={this.props.stations} label="Depart From"/>
+    <StationSelector keyName="2" onChangeHandler={this.props.onChangeDestHandler} stations={this.props.stations} label="Arrive At"/>
 
-    <div class="row justify-content-md-center">
-      <div class="col-md-4">
+    <div className="row justify-content-md-center">
+      <div className="col-md-4">
       <hr/>
       </div>
     </div>
