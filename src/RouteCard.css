@@ -1,35 +1,79 @@
-.stopCircle {
-  width: 30px;
-  height: 40px;
+/* Wraps the info for a single leg of the trip */
+.legContainerHorizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.iconHolderColumn {
+  width: 75px;
+  min-height: 80px;
   text-align: center;
-  line-height: 25px;
   vertical-align: middle;
+}
+
+.iconHolderColumn p {
+    margin: 0px;
+    padding: 3px 0 3px 0;
 }
 
 .stopCircleIcon {
-  background-color: red;
   border-radius: 100%;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
   text-align: center;
-  line-height: 25px;
   vertical-align: middle;
+  padding: 0 0 0 0;
+  margin: 0 auto 0 auto;
 }
 
-.iconTop {
-  margin: 10px 0 0 0;
+/* The circle icon for the final leg */
+.endCapCircleIcon {
+    background-color: transparent;
 }
-
-.iconBot {
-  margin: 0 0 10px 0;
-}
-.stopPadder {
+/* Column containing the line icon */
+.stopPadderColumn {
+  position: relative;
   width: 5px;
-  height: 40px;
+  height: 100%;
   background-color: red;
 }
 
-.stopContainer {
+/* The final padder column for the last leg */
+.endCapPadder {
+  height: 1px;
+}
+/* White circle icon for a stop */
+.stopPadderPin {
+  position: absolute;
+  top: -5px;
+  left: -4px;
+  background-color: white;
+  border: 2px black solid;
+  border-radius: 100%;
+  width: 14px;
+  height: 14px;
+  padding: 0 0 0 0;
+  margin: 0 auto 0 auto;
+}
+
+/* Column containing the stop information */
+.stopInfoColumn {
+  min-width: 100px;
+  min-height: 75px;
+}
+
+.stopInfoColumn p {
+    margin: 0px;
+    padding: 0 0 0 0;
+}
+
+
+
+/* Wraps the center column of a single leg */
+.visualColumnContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,9 +86,10 @@
   align-items: flex-start;
 }
 
+/* Wraps all route information */
 .stopCardWrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
 }
@@ -52,7 +97,6 @@
 .stopCircleInfo {
   height: 40px;
   text-align: left;
-  line-height: 1px;
   padding: 0 0 0 10px;
 }
 
@@ -66,6 +110,5 @@
 .stopPadderInfo {
   height: 40px;
   text-align: left;
-  line-height: 5px;
   padding: 12px 0 0 10px;
 }

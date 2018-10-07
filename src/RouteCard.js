@@ -13,47 +13,49 @@ class RouteCard extends Component {
         var currentLine = this.props.lineMap[currentRoute.leg[i]['@line']]
         legs.push(
           <Fragment key={i}>
-          <div className="stopCardWrapper">
-          <div className="stopContainer">
-          <div className="stopCircle">
-            <div className="stopCircleIcon iconTop" style={{backgroundColor: currentLine.hexcolor}}>
-              <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          {/* Horizontal section representing one leg */}
+          <div className="legContainerHorizontal">
+            {/* Column containing icon and time */}
+            <div className="iconHolderColumn">
+              <div className="stopCircleIcon" style={{backgroundColor: currentLine.hexcolor}}>
+                <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              </div>
+              <p>RED</p>
             </div>
-          </div>
-            <div className="stopPadder" style={{backgroundColor: currentLine.hexcolor}}>
+            {/* Column containing line seperator */}
+            <div className="stopPadderColumn" style={{backgroundColor: currentLine.hexcolor}}>
+            <div className="stopPadderPin"></div>
             </div>
-            <div className="stopCircle">
-            <div className="stopCircleIcon iconBot" style={{backgroundColor: currentLine.hexcolor}}>
-              <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            {/* Column containing station information */}
+            <div className="stopInfoColumn">
+            <p><b>{this.props.stationMap[currentRoute.leg[i]['@origin']].name}</b></p>
+            <p>{i == 0 ? <span>Board</span> : <span>Transfer</span>} at {currentRoute.leg[i]['@origTimeMin']}</p>
+            <p>Ride for 7 stops</p>
             </div>
-          </div>
-          </div>
-
-          <div className="stopInfoContainer">
-            <div className="stopCircleInfo infoTop">
-              <p><b>{this.props.stationMap[currentRoute.leg[i]['@origin']].name}</b></p>
-              <p>Board at {currentRoute.leg[i]['@origTimeMin']}</p>
-            </div>
-            <div className="stopPadderInfo">
-              <p>{currentLine.name}</p>
-            </div>
-            <div className="stopCircleInfo infoBot">
-            <p><b>{this.props.stationMap[currentRoute.leg[i]['@destination']].name}</b></p>
-            <p>Exit at {currentRoute.leg[i]['@destTimeMin']}</p>
-            </div>
-          </div>
           </div>
           </Fragment>
         )
 
-        // Add a buffer row if there's a transfer
-        if(i<currentRoute.leg.length-1) {
+        // Add the end-cap row if we're done
+        if(i == currentRoute.leg.length-1) {
           legs.push(
-            <tr>
-            <td><span className="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span></td>
-            <td>Transfer Lines</td>
-            <td></td>
-            </tr>
+            <Fragment key={i}>
+            {/* Horizontal section representing one leg */}
+            <div className="legContainerHorizontal">
+              {/* Column containing icon and time */}
+              <div className="iconHolderColumn">
+              </div>
+              {/* Column containing line seperator */}
+              <div className="stopPadderColumn endCapPadder" style={{backgroundColor: currentLine.hexcolor}}>
+              <div className="stopPadderPin"></div>
+              </div>
+              {/* Column containing station information */}
+              <div className="stopInfoColumn">
+              <p><b>{this.props.stationMap[currentRoute.leg[i]['@destination']].name}</b></p>
+              <p>Arrive at {currentRoute.leg[i]['@destTimeMin']}</p>
+              </div>
+            </div>
+            </Fragment>
           )
         }
       }
@@ -65,7 +67,9 @@ class RouteCard extends Component {
         </div>
         <div class="panel-body">
         <div class="col-md-12">
+          <div className="stopCardWrapper">
           {legs}
+          </div>
         </div>
         </div>
       </div>
