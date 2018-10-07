@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import './App.css';
 import StationSelector from './StationSelector.js';
 import RouteDisplay from './RouteDisplay.js';
+import HeaderContainer from './HeaderContainer.js';
 
 class App extends Component {
   constructor(props) {
@@ -62,7 +63,7 @@ class App extends Component {
     if (this.state.sourceStation == null || this.state.destStation == null) {
       return;
     }
-    var url = `${process.env.REACT_APP_API_URL}/sched.aspx?cmd=depart&orig=${this.state.sourceStation}&dest=${this.state.destStation}&a=4&json=y&key=${process.env.REACT_APP_API_KEY}`;
+    var url = `${process.env.REACT_APP_API_URL}/sched.aspx?cmd=depart&orig=${this.state.sourceStation}&dest=${this.state.destStation}&a=4&b=0&json=y&key=${process.env.REACT_APP_API_KEY}`;
     fetch(url)
     .then((response) => {
         return response.json();
@@ -77,11 +78,8 @@ class App extends Component {
     return (
       <div className="App">
         <div className="container">
-
-        <StationSelector onChangeHandler={this.onSelectChangeSource.bind(this)} stations={this.state.stations} label="Depart From"/>
-        <StationSelector onChangeHandler={this.onSelectChangeTarget.bind(this)} stations={this.state.stations} label="Arrive At"/>
-
-        <RouteDisplay stations={this.state.stations} trips={this.state.trips} lineMap={this.state.lineMap} stationMap={this.state.stationMap}/>
+          <HeaderContainer onChangeSourceHandler={this.onSelectChangeSource.bind(this)} onChangeDestHandler={this.onSelectChangeTarget.bind(this)} stations={this.state.stations}/>
+          <RouteDisplay stations={this.state.stations} trips={this.state.trips} lineMap={this.state.lineMap} stationMap={this.state.stationMap}/>
         </div>
       </div>
     );
