@@ -21,7 +21,6 @@ class App extends Component {
         var lineMap = {};
         for(var i=0; i<json.root.routes.route.length; i++) {
           var currentRoute = json.root.routes.route[i];
-          console.log(`${currentRoute.routeID} = ${currentRoute.name}`)
           lineMap[currentRoute.routeID] = currentRoute;
         }
         this.setState({lineMap: lineMap});
@@ -42,21 +41,18 @@ class App extends Component {
           stationMap[currentStation.abbr] = currentStation;
         }
         this.setState({stationMap: stationMap});
-        console.log(JSON.stringify(stationMap))
       }).catch(e => {
         console.log(e)
       })
   }
 
   onSelectChangeSource(event) {
-    console.log('Switched station to ' + event.target.value);
     this.setState({sourceStation: event.target.value}, () => {
       this.calculateRoute();
     })
   }
 
   onSelectChangeTarget(event) {
-    console.log('Switched station to ' + event.target.value);
     this.setState({destStation: event.target.value}, () => {
       this.calculateRoute();
     })
@@ -64,7 +60,6 @@ class App extends Component {
 
   calculateRoute() {
     if (this.state.sourceStation == null || this.state.destStation == null) {
-      console.log('nope')
       return;
     }
     var url = `${process.env.REACT_APP_API_URL}/sched.aspx?cmd=depart&orig=${this.state.sourceStation}&dest=${this.state.destStation}&a=4&json=y&key=${process.env.REACT_APP_API_KEY}`;
@@ -73,7 +68,6 @@ class App extends Component {
         return response.json();
     }).then((json) => {
       this.setState({trips: json.root.schedule.request.trip});
-      console.log(this.state.trips)
     }).catch(e => {
       console.log(e)
     })

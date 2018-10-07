@@ -7,7 +7,6 @@ class RouteCard extends Component {
   }
 
   mapColorToName(hexValue) {
-    console.log('hex ' + hexValue)
     switch(hexValue) {
       case "#0099cc":
         return "Blue";
