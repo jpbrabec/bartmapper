@@ -1,5 +1,6 @@
 /* Wraps the info for a single leg of the trip */
 .legContainerHorizontal {
+  height: 60px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
