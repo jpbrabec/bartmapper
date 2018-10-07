@@ -67,7 +67,7 @@ class App extends Component {
       console.log('nope')
       return;
     }
-    var url = `${process.env.REACT_APP_API_URL}/sched.aspx?cmd=depart&orig=${this.state.sourceStation}&dest=${this.state.destStation}&b=0&json=y&key=${process.env.REACT_APP_API_KEY}`;
+    var url = `${process.env.REACT_APP_API_URL}/sched.aspx?cmd=depart&orig=${this.state.sourceStation}&dest=${this.state.destStation}&a=4&json=y&key=${process.env.REACT_APP_API_KEY}`;
     fetch(url)
     .then((response) => {
         return response.json();
