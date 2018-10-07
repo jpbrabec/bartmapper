@@ -18,7 +18,7 @@ class RouteCard extends Component {
             {/* Column containing icon and time */}
             <div className="iconHolderColumn">
               <div className="stopCircleIcon" style={{backgroundColor: currentLine.hexcolor}}>
-                <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <i className="fas fa-train fa-2x"></i>
               </div>
               <p>RED</p>
             </div>
@@ -44,6 +44,9 @@ class RouteCard extends Component {
             <div className="legContainerHorizontal">
               {/* Column containing icon and time */}
               <div className="iconHolderColumn">
+              <div className="stopCircleIcon endCapCircleIcon" style={{backgroundColor: currentLine.hexcolor}}>
+                <i className="fas fa-walking fa-2x"></i>
+              </div>
               </div>
               {/* Column containing line seperator */}
               <div className="stopPadderColumn endCapPadder" style={{backgroundColor: currentLine.hexcolor}}>
@@ -62,9 +65,6 @@ class RouteCard extends Component {
 
      return (
        <div class="panel panel-default" key={currentRoute['@destTimeMin']}>
-        <div class="panel-heading">
-          <h3 class="panel-title">Arrive around {currentRoute['@destTimeMin']}- ${currentRoute['@fare']}</h3>
-        </div>
         <div class="panel-body">
         <div class="col-md-12">
           <div className="stopCardWrapper">

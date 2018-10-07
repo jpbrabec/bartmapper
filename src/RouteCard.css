@@ -8,7 +8,6 @@
 
 .iconHolderColumn {
   width: 75px;
-  min-height: 80px;
   text-align: center;
   vertical-align: middle;
 }
@@ -25,13 +24,12 @@
   line-height: 35px;
   text-align: center;
   vertical-align: middle;
-  padding: 0 0 0 0;
+  padding: 3px 0 0 0;
   margin: 0 auto 0 auto;
 }
 
 /* The circle icon for the final leg */
 .endCapCircleIcon {
-    background-color: transparent;
 }
 /* Column containing the line icon */
 .stopPadderColumn {
@@ -62,7 +60,8 @@
 /* Column containing the stop information */
 .stopInfoColumn {
   min-width: 100px;
-  min-height: 75px;
+  text-align: left;
+  padding: -0 0 0 15px;
 }
 
 .stopInfoColumn p {
