@@ -45,26 +45,28 @@ self.addEventListener('fetch', event => {
   // Do not cache the route lookup because it changes each time
   let shouldCache = !event.request.url.includes(`sched.aspx`);
   console.log("Should cache " + event.request.url + "? "+shouldCache);
-  if(shouldCache) {
-    event.respondWith(
-      caches.match(event.request).then(cachedResponse => {
-        if (cachedResponse) {
-          console.log('Cache hit!!')
-          return cachedResponse;
-        }
-        console.log('aww cache miss :(')
 
-        return caches.open(RUNTIME).then(cache => {
-          return fetch(event.request).then(response => {
-            console.log('cahcin away')
-            // Put a copy of the response in the runtime cache.
-            return cache.put(event.request, response.clone()).then(() => {
-              return response;
-            });
+
+  event.respondWith(
+    caches.match(event.request).then(cachedResponse => {
+      if (cachedResponse && shouldCache) {
+        return cachedResponse;
+      }
+
+      return caches.open(RUNTIME).then(cache => {
+        return fetch(event.request).then(response => {
+          console.log('cahcin away')
+          // Put a copy of the response in the runtime cache.
+          return cache.put(event.request, response.clone()).then(() => {
+            return response;
           });
+        }).catch(error => {
+          // We're offline! Show the offline page!
+          console.log(`Looks like we're offline :(`);
+          return null;
         });
-      })
-    );
-  }
+      });
+    })
+  );
 
 });
