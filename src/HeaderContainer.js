@@ -17,8 +17,8 @@ class HeaderContainer extends Component {
       </div>
     </div>
 
-    <StationSelector keyName="1" onChangeHandler={this.props.onChangeSourceHandler} stations={this.props.stations} label="Depart From"/>
-    <StationSelector keyName="2" onChangeHandler={this.props.onChangeDestHandler} stations={this.props.stations} label="Arrive At"/>
+    <StationSelector keyName="1" selectedStation={this.props.sourceStation} onChangeHandler={this.props.onChangeSourceHandler} stations={this.props.stations} label="Depart From"/>
+    <StationSelector keyName="2" selectedStation={this.props.destStation} onChangeHandler={this.props.onChangeDestHandler} stations={this.props.stations} label="Arrive At"/>
 
     <div className="row justify-content-md-center">
       <div className="col-md-4">

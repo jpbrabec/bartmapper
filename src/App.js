@@ -45,17 +45,34 @@ class App extends Component {
       }).catch(e => {
         console.log(e)
       })
+
+      //Load localStorage
+      if(window.localStorage.getItem('savedOrigin')) {
+        console.log('updating state')
+        this.setState({sourceStation: window.localStorage.getItem('savedOrigin')}, () => {
+          this.calculateRoute();
+        });
+      };
+      if(window.localStorage.getItem('savedDest')) {
+        console.log('updating state')
+        this.setState({destStation: window.localStorage.getItem('savedDest')}, () => {
+          this.calculateRoute();
+        });
+      };
+
   }
 
   onSelectChangeSource(event) {
     this.setState({sourceStation: event.target.value}, () => {
       this.calculateRoute();
+      window.localStorage.setItem('savedOrigin', this.state.sourceStation);
     })
   }
 
   onSelectChangeTarget(event) {
     this.setState({destStation: event.target.value}, () => {
       this.calculateRoute();
+      window.localStorage.setItem('savedDest', this.state.destStation);
     })
   }
 
@@ -78,7 +95,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="container">
-          <HeaderContainer onChangeSourceHandler={this.onSelectChangeSource.bind(this)} onChangeDestHandler={this.onSelectChangeTarget.bind(this)} stations={this.state.stations}/>
+          <HeaderContainer sourceStation={this.state.sourceStation} destStation={this.state.destStation} onChangeSourceHandler={this.onSelectChangeSource.bind(this)} onChangeDestHandler={this.onSelectChangeTarget.bind(this)} stations={this.state.stations}/>
           <RouteDisplay stations={this.state.stations} trips={this.state.trips} lineMap={this.state.lineMap} stationMap={this.state.stationMap}/>
         </div>
       </div>
