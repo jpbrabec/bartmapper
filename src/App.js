@@ -65,7 +65,7 @@ class App extends Component {
       };
 
       //Automatically refresh
-      setInterval(this.calculateRoute.bind(this), 2000);
+      setInterval(this.calculateRoute.bind(this), 1000 * 30);
 
   }
 
@@ -96,9 +96,7 @@ class App extends Component {
     .then((response) => {
         return response.json();
     }).then((json) => {
-      this.setState({trips: json.root.schedule.request.trip}, () => {
-        this.calculateRoute();
-      });
+      this.setState({trips: json.root.schedule.request.trip});
     }).catch(e => {
       console.log(e)
     })
