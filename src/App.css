@@ -10,3 +10,8 @@ h2 {
 .resultsPanel {
   padding: 20px 0 0 0;
 }
+
+.formPadding {
+  padding-left: 25px;
+  padding-right: 25px;
+}
