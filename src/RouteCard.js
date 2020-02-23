@@ -7,7 +7,7 @@ class RouteCard extends Component {
   }
 
   mapColorToName(hexValue) {
-    switch(hexValue) {
+    switch(hexValue.toLowerCase()) {
       case "#0099cc":
         return "Blue";
       case "#ffff33":
